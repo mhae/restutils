@@ -3,6 +3,7 @@ package restutils
 import (
 	"testing"
 	"reflect"
+	"fmt"
 )
 
 // Embedded struct for source
@@ -48,7 +49,22 @@ func TestBasic(t *testing.T) {
 	if reflect.DeepEqual(dest, expected) == false {
 		t.Error("mapping failed: expected=", expected, ", got", dest)
 	}
+}
 
+type Source struct {
+	SourceOnly string
+	Common string
+}
 
+type Destination struct {
+	DestinationOnly int
+	Common string
+}
 
+func TestExample(t *testing.T) {
+	s := &Source{"SourceOnly", "Common"}
+	d := &Destination{DestinationOnly:1}
+
+	Mapper(s, d)
+	fmt.Println(d)
 }
