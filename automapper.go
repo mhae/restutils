@@ -17,25 +17,7 @@ func Mapper(src interface{}, dest interface{})  {
 		return
 	}
 
-	for i:=0; i<st.NumField(); i++ {
-
-		df := dv.FieldByName(st.Field(i).Name)
-
-		if !(df.IsValid() && df.CanSet()) {
-			continue
-		}
-
-		if df.Kind() != st.Field(i).Type.Kind() {
-			continue
-		}
-
-		if df.Kind() == reflect.Struct {
-			mapEmbeddedField(sv.Field(i), df)
-		} else {
-
-			df.Set(sv.Field(i))
-		}
-	}
+	mapEmbeddedField(sv, dv)
 }
 
 func mapEmbeddedField(sv reflect.Value, dv reflect.Value) {
