@@ -42,9 +42,11 @@ func TestBasic(t *testing.T) {
 	source := S{"S1", 1, "CS", []string{"l1"}, []int{1}, ES{"CES", 1}}
 	dest := D{D1:"D1", ES:ED{II:2}}
 
+	// Mapping source to dest results in this structure
 	expected := D{"D1", 1, "CS", []string{"l1"}, []int{1}, ED{"CES", 2}}
 
 	Mapper(&source, &dest)
+	
 	// compare
 	if reflect.DeepEqual(dest, expected) == false {
 		t.Error("mapping failed: expected=", expected, ", got", dest)
